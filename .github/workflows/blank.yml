@@ -15,8 +15,8 @@ jobs:
       uses: actions/setup-python@v5.2.0
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install git+https://github.com/westhecool/python-apkpure.git @ main # 克隆并安装该repo
+        sudo python -m pip install --upgrade pip
+        sudo pip install git+https://github.com/westhecool/python-apkpure.git @ main # 克隆并安装该repo
     - name: Run tests
       run: |
         python cli.py

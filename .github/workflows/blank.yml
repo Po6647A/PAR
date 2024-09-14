@@ -21,6 +21,8 @@ jobs:
         sudo python -m pip install --upgrade pip
         cd python-apkpure
         sudo python -m pip install -r requirements.txt
-    - name: Run tests
+    - name: Get Apk
       run: |
-        python cli.py
+        cd python-apkpure
+        python cli.py download com.PigeonGames.Phigros --output-file Phigros.apk
+        ls

@@ -16,7 +16,8 @@ jobs:
     - name: Clone Project
       run: |
         sudo apt update
-        sudo apt install libogg-dev libvorbis-dev
+        sudo apt upgrade -y
+        sudo apt install libogg-dev libvorbis-dev -y
         git clone https://github.com/westhecool/python-apkpure.git --depth 1
         git clone https://github.com/364hao/Phigros_Resource.git --depth 1
     - name: Get Phigros Apk
@@ -38,4 +39,4 @@ jobs:
         python gameInformation.py com.PigeonGames.Phigros.apk
         python resource.py ./Android/obb/com.PigeonGames.Phigros/main.112.com.PigeonGames.Phigros.obb
         python phira.py
-      
+        ls

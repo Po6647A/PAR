@@ -19,16 +19,15 @@ jobs:
         git clone https://github.com/3035936740/Phigros_Resource.git --depth 1
     - name: Get Phigros Apk
       run: |
-        sudo python -m pip install --upgrade pip
+        sudo python -m pip install --upgrade pip --root-user-action ignore
         cd python-apkpure
-        sudo python -m pip install -r requirements.txt
+        sudo python -m pip install -r requirements.txt --root-user-action ignore
         python cli.py download com.PigeonGames.Phigros --output-file Phigros.xapk
         ls
     - name: Extra Apk
-      uses: hoatruongdev09/extract-zip@v1.2
+      uses: TonyBogdanov/zip@1.0
       with:
-        input-path: ./python-apkpure/Phigros.xapk
-        output-path: ./Phigros_Resource
+        args: unzip -qq ./Phigros.xapk -d ./PhigrosLibrary_Resource
     - name: Release Assests
       run: |
         cd PhigrosLibrary_Resource

@@ -27,7 +27,7 @@ jobs:
     - name: Extra Apk
       uses: TonyBogdanov/zip@1.0
       with:
-        args: unzip -qq ./Phigros.xapk -d ./PhigrosLibrary_Resource
+        args: unzip -qq ./python-apkpure/Phigros.xapk -d ./PhigrosLibrary_Resource
     - name: Release Assests
       run: |
         cd PhigrosLibrary_Resource

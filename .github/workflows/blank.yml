@@ -30,15 +30,15 @@ jobs:
     - name: Extra Apk
       uses: DuckSoft/extract-7z-action@v1.0
       with:
-        pathSource: ./python-apkpure/Phigros.xapk
-        pathTarget: ./Phigros_Resource
+        pathSource: .\\python-apkpure/Phigros.xapk
+        pathTarget: .\\Phigros_Resource
     - name: Release Assests
       run: |
         cd Phigros_Resource
         ls
         python -m pip install UnityPy fsb5 rich
         python gameInformation.py com.PigeonGames.Phigros.apk
-        python resource.py ./Android/obb/com.PigeonGames.Phigros/main.112.com.PigeonGames.Phigros.obb
+        python resource.py '.\\Android\\obb\\com.PigeonGames.Phigros\\main.112.com.PigeonGames.Phigros.obb'
         python phira.py
         ls
     - name: Generate video 

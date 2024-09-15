@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -19,9 +19,9 @@ jobs:
         git clone https://github.com/364hao/Phigros_Resource.git --depth 1
     - name: Get Phigros Apk
       run: |
-        sudo python -m pip install --upgrade pip
+        python -m pip install --upgrade pip
         cd python-apkpure
-        sudo python -m pip install -r requirements.txt
+        python -m pip install -r requirements.txt
         python cli.py download com.PigeonGames.Phigros --output-file Phigros.xapk
         ls
     - name: Extra Apk
@@ -32,7 +32,7 @@ jobs:
       run: |
         cd Phigros_Resource
         ls
-        sudo python -m pip install UnityPy fsb5 rich
+        python -m pip install UnityPy fsb5 rich
         python gameInformation.py com.PigeonGames.Phigros.apk
         python resource.py ./Android/obb/com.PigeonGames.Phigros/main.112.com.PigeonGames.Phigros.obb
         python phira.py

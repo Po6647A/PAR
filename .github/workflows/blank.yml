@@ -45,4 +45,4 @@ jobs:
       run: |
         cd PhigrosPlayer
         python -m pip install -r requirements.txt
-        
+        ls

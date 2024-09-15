@@ -16,7 +16,7 @@ jobs:
     - name: Clone Project
       run: |
         git clone https://github.com/westhecool/python-apkpure.git --depth 1
-        git clone https://github.com/3035936740/Phigros_Resource.git --depth 1
+        git clone https://github.com/364hao/Phigros_Resource.git --depth 1
     - name: Get Phigros Apk
       run: |
         sudo python -m pip install --upgrade pip
@@ -27,10 +27,10 @@ jobs:
     - name: Extra Apk
       uses: TonyBogdanov/zip@1.0
       with:
-        args: unzip -qq ./python-apkpure/Phigros.xapk -d ./PhigrosLibrary_Resource
+        args: unzip -qq ./python-apkpure/Phigros.xapk -d ./Phigros_Resource
     - name: Release Assests
       run: |
-        cd PhigrosLibrary_Resource
+        cd Phigros_Resource
         ls
         sudo python -m pip install -r requirements.txt
         python gameInformation.py com.PigeonGames.Phigros.apk

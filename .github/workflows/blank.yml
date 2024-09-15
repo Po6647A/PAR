@@ -32,7 +32,7 @@ jobs:
       run: |
         cd Phigros_Resource
         ls
-        sudo python -m pip install UnityPy fsb5
+        sudo python -m pip install UnityPy fsb5 rich
         python gameInformation.py com.PigeonGames.Phigros.apk
         python resource.py ./Android/obb/com.PigeonGames.Phigros/main.112.com.PigeonGames.Phigros.obb
         python phira.py

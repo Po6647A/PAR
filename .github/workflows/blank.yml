@@ -13,13 +13,18 @@ jobs:
     - uses: actions/checkout@v3
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
-    - name: Clone Project
+      with:
+        python-version: 3.12.0
+    - name: Set up Dependencies
       run: |
         sudo apt update
         sudo apt upgrade -y
         sudo apt install libogg-dev libvorbis-dev -y
+    - name: Clone Project
+      run: |
         git clone https://github.com/westhecool/python-apkpure.git --depth 1
         git clone https://github.com/364hao/Phigros_Resource.git --depth 1
+        git clone https://github.com/364hao/PhigrosPlayer.git --depth 1
     - name: Get Phigros Apk
       run: |
         python -m pip install --upgrade pip
@@ -40,3 +45,8 @@ jobs:
         python resource.py ./Android/obb/com.PigeonGames.Phigros/main.112.com.PigeonGames.Phigros.obb
         python phira.py
         ls
+    - name: Generate video 
+      run: |
+        cd PhigrosPlayer
+        python -m pip install -r requirements.txt
+        

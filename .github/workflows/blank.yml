@@ -13,17 +13,28 @@ jobs:
     - uses: actions/checkout@v3
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
-    - name: Clone Apkpure-python
+    - name: Clone Project
       run: |
         git clone https://github.com/westhecool/python-apkpure.git --depth 1
-    - name: Install dependencies
+        git clone https://github.com/3035936740/Phigros_Resource.git --depth 1
+    - name: Get Phigros Apk
       run: |
         sudo python -m pip install --upgrade pip
         cd python-apkpure
         sudo python -m pip install -r requirements.txt
-    - name: Get Phigros Apk
-      run: |
-        cd python-apkpure
-        python cli.py download com.PigeonGames.Phigros 
+        python cli.py download com.PigeonGames.Phigros --output-file Phigros.xapk
         ls
+    - name: Extra Apk
+      uses: hoatruongdev09/extract-zip@v1.2
+      with:
+        input-path: ./python-apkpure/Phigros.xapk
+        output-path: ./Phigros_Resource
+    - name: Release Assests
+      run: |
+        cd PhigrosLibrary_Resource
+        ls
+        sudo python -m pip install -r requirements.txt
+        python gameInformation.py com.PigeonGames.Phigros.apk
+        python resource.py ./Android/obb/com.PigeonGames.Phigros/main.112.com.PigeonGames.Phigros.obb
+        python phira.py
       

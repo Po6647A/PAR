@@ -14,7 +14,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
       with:
-        python-version: 3.12.0
+        python-version: 3.12.6
     - name: Clone Project
       run: |
         git clone https://github.com/westhecool/python-apkpure.git --depth 1

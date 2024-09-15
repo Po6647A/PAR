@@ -9,7 +9,7 @@ for difficulty in os.listdir(PhiraDir):
 	for chartName in os.listdir(difficultyDir):
 		print(chartName)
 		chartPath = os.path.join(difficultyDir, chartName)
-		subprocess.Popen(
+		subprocess.run(
 			f'python {maker} {chartPath} {difficultyDir} --fps 144', 
 			stdout = subprocess.DEVNULL,
 			stderr = subprocess.DEVNULL

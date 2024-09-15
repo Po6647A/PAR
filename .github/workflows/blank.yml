@@ -28,11 +28,10 @@ jobs:
         python cli.py download com.PigeonGames.Phigros --output-file Phigros.xapk
         ls
     - name: Extra Apk
-      uses: TheDoctor0/zip-release@0.7.6
+      uses: ihiroky/extract-action@v1
       with:
-        filename: Phigros.xapk
-        path: ./python-apkpure
-        directory: ./Phigros_Resource
+        file_path: ./python-apkpure/Phigros.xapk
+        extract_dir: ./Phigros_Resource
     - name: Release Assests
       run: |
         cd Phigros_Resource

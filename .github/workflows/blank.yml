@@ -15,11 +15,6 @@ jobs:
       uses: actions/setup-python@v5.2.0
       with:
         python-version: 3.12.0
-    - name: Set up Dependencies
-      run: |
-        sudo apt update
-        sudo apt upgrade -y
-        sudo apt install libogg-dev libvorbis-dev -y
     - name: Clone Project
       run: |
         git clone https://github.com/westhecool/python-apkpure.git --depth 1

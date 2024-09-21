@@ -17,7 +17,6 @@ for difficulty in os.listdir(PhiraDir):
 				chartPath = os.path.join(difficultyDir, chartName)
 				name, _ = os.path.splitext(chartName)
 				makerdir = os.path.join(difficultyDir, name)
-				os.mkdir(makerdir)
 				shutil.copytree(makerPath, makerdir)
 				maker = os.path.join(os.path.join(makerdir, 'phira-render'), 'phira-render.exe')
 				processes.append(

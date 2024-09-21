@@ -49,7 +49,7 @@ jobs:
       run: |
         curl -L -o phichain-converter.exe https://github.com/364hao/Test/releases/download/ActionTools/phichain-converter.exe
         ls
-        phichain-converter.exe phira\\AT\\INFiNiTEENERZYOverdoze.RekuMochizuki-AT.pez
+        D:\\a\\Test\\Test\\phichain-converter.exe phira\\AT\\INFiNiTEENERZYOverdoze.RekuMochizuki-AT.pez
     - name: Delete Release
       uses: sgpublic/delete-release-action@v1.2
       with:

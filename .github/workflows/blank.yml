@@ -45,6 +45,12 @@ jobs:
         ls phira\\AT
       env:
         PYTHONIOENCODING: utf-8
+    - name: Test
+      run: |
+        curl -L -o phichain-v0.4.1+build.377-x86_64-pc-windows-msvc.zip https://github.com/Ivan-1F/phichain/actions/runs/10862492973/artifacts/1933189041
+        unzip phichain-v0.4.1+build.377-x86_64-pc-windows-msvc.zip
+        ls
+        phichain-v0.4.1+build.377-x86_64-pc-windows-msvc\\phichain-renderer.exe phira\\AT\\INFiNiTEENERZYOverdoze.RekuMochizuki-AT.pez
     - name: Delete Release
       uses: sgpublic/delete-release-action@v1.2
       with:
@@ -64,12 +70,10 @@ jobs:
       env:
         PYTHONIOENCODING: utf-8
     - name: Render Charts
-      uses: coactions/setup-xvfb@v1
-      with:
-        run: |
-            unzip phira-render.zip
-            ls
-            python ChartRenderer.py
+      run: |
+        unzip phira-render.zip
+        ls
+        python ChartRenderer.py
       env:
         PYTHONIOENCODING: utf-8
     - name: Upload Artifact

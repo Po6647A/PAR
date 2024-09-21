@@ -70,8 +70,8 @@ jobs:
         python ChartConverter.py
       env:
         PYTHONIOENCODING: utf-8
+    - uses: federicocarboni/setup-ffmpeg@v3.1
     - name: Render Charts
-      uses: federicocarboni/setup-ffmpeg@v3.1
       run: |
         unzip phira-render.zip
         python ChartRenderer.py

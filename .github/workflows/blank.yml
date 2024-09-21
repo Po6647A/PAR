@@ -27,10 +27,8 @@ jobs:
     - name: Build Phichain
       run: |
         cd phichain
-        cargo build -p phichain --release --target x86_64-pc-windows-gnu
         cargo build -p phichain-converter --release --target x86_64-pc-windows-gnu
         cargo build -p phichain-renderer --release --target x86_64-pc-windows-gnu
-        cp ./target/x86_64-pc-windows-gnu/release/phichain.exe "./phichain.exe"
         cp ./target/x86_64-pc-windows-gnu/release/phichain-converter.exe "./phichain-converter.exe"
         cp ./target/x86_64-pc-windows-gnu/release/phichain-renderer.exe "./phichain-renderer.exe"
         mv LICENSE assets phichain-editor/lang ./

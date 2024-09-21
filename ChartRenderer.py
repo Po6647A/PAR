@@ -15,7 +15,8 @@ for difficulty in os.listdir(PhiraDir):
 			if chartName.endswith('-rpe.pez'):
 				print(chartName)
 				chartPath = os.path.join(difficultyDir, chartName)
-				makerdir = difficultyDir + '\\' + chartName
+				name, _ = os.path.splitext(chartName)
+				makerdir = os.path.join(difficultyDir, name)
 				os.mkdir(makerdir)
 				shutil.copytree(makerPath, makerdir)
 				maker = os.path.join(os.path.join(makerdir, 'phira-render'), 'phira-render.exe')

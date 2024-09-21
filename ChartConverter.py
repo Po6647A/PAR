@@ -18,7 +18,7 @@ for difficultyDir in [EZ, HD, IN, AT]:
 for p in processes:
     p.wait()
 processes = []
-for difficultyDir in [ AT]:
+for difficultyDir in [AT]:
 	for chartName in os.listdir(difficultyDir):
 		name, extension = os.path.splitext(chartName)
 		chartName = name + '.rpe' + extension

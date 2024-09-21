@@ -29,9 +29,9 @@ jobs:
         cd phichain
         cargo build -p phichain-converter --release --target x86_64-pc-windows-gnu
         cargo build -p phichain-renderer --release --target x86_64-pc-windows-gnu
-        cp ./target/x86_64-pc-windows-gnu/release/phichain-converter.exe "./phichain-converter.exe"
-        cp ./target/x86_64-pc-windows-gnu/release/phichain-renderer.exe "./phichain-renderer.exe"
-        mv LICENSE assets phichain-editor/lang ./
+        mv ./target/x86_64-pc-windows-gnu/release/phichain-converter.exe "./phichain-converter.exe"
+        mv ./target/x86_64-pc-windows-gnu/release/phichain-renderer.exe "./phichain-renderer.exe"
+        mv LICENSE assets ./
       env:
         RUST_BACKTRACE: 1
     - name: Get Phigros Apk

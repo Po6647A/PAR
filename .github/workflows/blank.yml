@@ -31,7 +31,7 @@ jobs:
         cargo build -p phichain-renderer --release --target x86_64-pc-windows-gnu
         mv ./target/x86_64-pc-windows-gnu/release/phichain-converter.exe "./phichain-converter.exe"
         mv ./target/x86_64-pc-windows-gnu/release/phichain-renderer.exe "./phichain-renderer.exe"
-        mv LICENSE assets ./
+        mv LICENSE assets "phichain-editor/lang" ./
       env:
         RUST_BACKTRACE: 1
     - name: Get Phigros Apk
@@ -71,14 +71,18 @@ jobs:
       env:
         PYTHONIOENCODING: utf-8
     - name: Render Charts
+      uses: federicocarboni/setup-ffmpeg@v3.1
       run: |
         unzip phira-render.zip
         python ChartRenderer.py
       env:
         PYTHONIOENCODING: utf-8
+        RUST_BACKTRACE: 1
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: RenderCharts
         path: |
           ./
+      env:
+        RUST_BACKTRACE: 1

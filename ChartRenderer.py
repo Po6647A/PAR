@@ -12,11 +12,11 @@ for difficulty in os.listdir(PhiraDir):
 	if difficulty == 'AT':
 		difficultyDir = os.path.join(PhiraDir, difficulty)
 		for chartName in os.listdir(difficultyDir):
-			if chartName.endswith('-rpe.pez'):
+			if not chartName.endswith('-rpe.pez'):
 				chartPath = os.path.join(difficultyDir, chartName)
 				processes.append(
 					subprocess.Popen(
-						[makerPath, chartPath]
+						[makerPath, chartPath, '--fc-ap-indicator']
 					)
 				)
 for p in processes:

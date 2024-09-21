@@ -10,7 +10,7 @@ EZ = os.path.join(resourceDir, "Chart_EZ")
 HD = os.path.join(resourceDir, "Chart_HD")
 IN = os.path.join(resourceDir, "Chart_IN")
 AT = os.path.join(resourceDir, "Chart_AT")
-for difficultyDir in [EZ, HD, IN, AT]:
+for difficultyDir in [ AT]:
 	for chartName in os.listdir(difficultyDir):
 		print(chartName)
 		chartPath = os.path.join(difficultyDir, chartName)

@@ -10,46 +10,51 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
+    - name: Set up Rust toolchain
+      uses: dtolnay/rust-toolchain@stable
       with:
-        python-version: 3.12.6
+        toolchain: stable
+        targets: x86_64-pc-windows-gnu
+        components: rustfmt, clippy
     - name: Clone Project
       run: |
         git clone https://github.com/westhecool/python-apkpure.git --depth 1
         git clone https://github.com/364hao/Phigros_Resource.git --depth 1
-        curl -L -o phira-render.zip https://github.com/364hao/Test/releases/download/ActionTools/phira-render.zip
-        curl -L -o phichain-converter.exe https://github.com/364hao/Test/releases/download/ActionTools/phichain-converter.exe
+        git clone https://github.com/Ivan-1F/phichain.git --depth 1
+    - name: Build Phichain
+        run: |
+          cd phichain
+          cargo build -p phichain --release --target x86_64-pc-windows-gnu
+          cargo build -p phichain-converter --release --target x86_64-pc-windows-gnu
+          cargo build -p phichain-renderer --release --target x86_64-pc-windows-gnu
+          cp ./target/x86_64-pc-windows-gnu/release/phichain.exe "./phichain.exe"
+          cp ./target/x86_64-pc-windows-gnu/release/phichain-converter.exe "./phichain-converter.exe"
+          cp ./target/x86_64-pc-windows-gnu/release/phichain-renderer.exe "./phichain-renderer.exe"
+          mv LICENSE assets phichain-editor/lang ./
+        env:
+          RUST_BACKTRACE: 1
     - name: Get Phigros Apk
       run: |
-        python -m pip install --upgrade pip
         cd python-apkpure
         python -m pip install -r requirements.txt
         python cli.py download com.PigeonGames.Phigros --output-file Phigros.xapk
-        ls
     - name: Extra Apk
       uses: DuckSoft/extract-7z-action@v1.0
       with:
-        pathSource: .\\python-apkpure/Phigros.xapk
+        pathSource: .\\python-apkpure\\Phigros.xapk
         pathTarget: .\\Phigros_Resource
     - name: Release Assests
       run: |
         cd Phigros_Resource
-        ls
         python -m pip install UnityPy fsb5 rich
         python gameInformation.py com.PigeonGames.Phigros.apk
         python resource.py ".\\Android\\obb\\com.PigeonGames.Phigros"
         python phira.py --rpe
-        ls
-        ls phira\\AT
       env:
         PYTHONIOENCODING: utf-8
-    - name: Test
-      run: |
-        curl -L -o phichain-renderer.exe https://github.com/364hao/Test/releases/download/ActionTools/phichain-renderer.exe
-        ls
-        D:\\a\\Test\\Test\\phichain-renderer.exe phira\\AT\\INFiNiTEENERZYOverdoze.RekuMochizuki-AT.pez
     - name: Delete Release
       uses: sgpublic/delete-release-action@v1.2
       with:
@@ -64,14 +69,12 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Convert Charts
       run: |
-        ls
         python ChartConverter.py
       env:
         PYTHONIOENCODING: utf-8
     - name: Render Charts
       run: |
         unzip phira-render.zip
-        ls
         python ChartRenderer.py
       env:
         PYTHONIOENCODING: utf-8

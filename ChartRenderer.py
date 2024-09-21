@@ -18,12 +18,12 @@ for difficulty in os.listdir(PhiraDir):
 				name, _ = os.path.splitext(chartName)
 				makerdir = os.path.join(difficultyDir, name)
 				shutil.copytree(makerPath, makerdir)
-				maker = os.path.join(makerdir, 'phira-render', 'phira-render', 'phira-render.exe')
+				maker = os.path.join(makerdir, 'phira-render', 'phira-render.exe')
+				print(os.listdir(makerdir))
 				print(maker, chartPath)
 				processes.append(
 					subprocess.Popen(
-						[maker, chartPath],
-						cwd = makerdir
+						maker+" "+chartPath
 					)
 				)
 for p in processes:

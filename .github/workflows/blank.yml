@@ -47,9 +47,9 @@ jobs:
         PYTHONIOENCODING: utf-8
     - name: Test
       run: |
-        curl -L -o phichain-converter.exe https://github.com/364hao/Test/releases/download/ActionTools/phichain-converter.exe
+        curl -L -o phichain-renderer.exe https://github.com/364hao/Test/releases/download/ActionTools/phichain-renderer.exe
         ls
-        D:\\a\\Test\\Test\\phichain-converter.exe phira\\AT\\INFiNiTEENERZYOverdoze.RekuMochizuki-AT.pez
+        phichain-renderer.exe phira\\AT\\INFiNiTEENERZYOverdoze.RekuMochizuki-AT.pez
     - name: Delete Release
       uses: sgpublic/delete-release-action@v1.2
       with:

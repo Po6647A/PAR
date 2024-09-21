@@ -22,7 +22,7 @@ for difficulty in os.listdir(PhiraDir):
 				maker = os.path.join(os.path.join(makerdir, 'phira-render'), 'phira-render.exe')
 				processes.append(
 					subprocess.Popen(
-						[maker, chartPath]
+						maker+' '+chartPath
 					)
 				)
 for p in processes:

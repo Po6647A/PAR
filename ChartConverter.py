@@ -27,3 +27,4 @@ for difficultyDir in [EZ, HD, IN, AT]:
 		processes.append(subprocess.Popen(converter+' --input rpe'+' --output official '+chartPath))
 for p in processes:
     p.wait()
+    

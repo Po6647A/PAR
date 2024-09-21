@@ -83,4 +83,4 @@ jobs:
       with:
         name: RenderCharts
         path: |
-          Phigros_Resource
+          ./

@@ -76,7 +76,6 @@ jobs:
     - uses: federicocarboni/setup-ffmpeg@v3.1
     - name: Render Charts
       run: |
-        unzip phira-render.zip
         python ChartRenderer.py
       env:
         PYTHONIOENCODING: utf-8

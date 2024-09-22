@@ -16,7 +16,7 @@ for difficulty in os.listdir(PhiraDir):
 				chartPath = os.path.join(difficultyDir, chartName)
 				processes.append(
 					subprocess.Popen(
-						[makerPath, chartPath, '--fc-ap-indicator']
+						makerPath+' '+chartPath+' --fc-ap-indicator'
 					)
 				)
 for p in processes:

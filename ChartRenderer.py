@@ -4,20 +4,17 @@ import shutil
 
 
 makerPath = os.path.abspath('phichain-renderer.exe')
-resourceDir = os.path.abspath('Phigros_Resource')
-PhiraDir = os.path.join(resourceDir, "phira")
+resourceDir = os.path.abspath('PhichainProject')
 
 processes = []
-for difficulty in os.listdir(PhiraDir):
-	if difficulty == 'AT':
-		difficultyDir = os.path.join(PhiraDir, difficulty)
-		for chartName in os.listdir(difficultyDir):
-			if not chartName.endswith('-rpe.pez'):
-				chartPath = os.path.join(difficultyDir, chartName)
-				processes.append(
-					subprocess.Popen(
-						makerPath+' '+chartPath+' --fc-ap-indicator'
-					)
-				)
+for difficulty in os.listdir(resourceDir):
+	difficultyDir = os.path.join(resourceDir, difficulty)
+	for chartName in os.listdir(difficultyDir):
+		chartPath = os.path.join(difficultyDir, chartName)
+		processes.append(
+			subprocess.Popen(
+				makerPath+' '+chartPath+' --fc-ap-indicator'
+			)
+		)
 for p in processes:
 	p.wait()

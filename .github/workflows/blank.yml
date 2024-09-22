@@ -11,6 +11,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Set up ffmpeg and ffprobe 
+      uses: federicocarboni/setup-ffmpeg@v3.1
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
     - name: Set up Rust toolchain
@@ -53,9 +55,30 @@ jobs:
         python -m pip install UnityPy fsb5 rich
         python gameInformation.py com.PigeonGames.Phigros.apk
         python resource.py ".\\Android\\obb\\com.PigeonGames.Phigros"
+      env:
+        PYTHONIOENCODING: utf-8
+    - name: Convert Charts
+      run: |
+        python ChartConverter.py
+      env:
+        PYTHONIOENCODING: utf-8
+    - name: Generate Phira Charts
+      run: |
+        cd Phigros_Resource
         python phira.py --rpe
       env:
         PYTHONIOENCODING: utf-8
+    - name: Generate Phichain Charts
+      run: |
+        python ChartPcTs.py
+      env:
+        PYTHONIOENCODING: utf-8
+    - name: Render Charts
+      run: |
+        python ChartRenderer.py
+      env:
+        PYTHONIOENCODING: utf-8
+        RUST_BACKTRACE: 1
     - name: Delete Release
       uses: sgpublic/delete-release-action@v1.2
       with:
@@ -68,18 +91,6 @@ jobs:
         draft-drop-count: -1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Convert Charts
-      run: |
-        python ChartConverter.py
-      env:
-        PYTHONIOENCODING: utf-8
-    - uses: federicocarboni/setup-ffmpeg@v3.1
-    - name: Render Charts
-      run: |
-        python ChartRenderer.py
-      env:
-        PYTHONIOENCODING: utf-8
-        RUST_BACKTRACE: 1
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:

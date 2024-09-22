@@ -32,7 +32,7 @@ for id, info in track(infos.items(), description = "WritingPhichainProject..."):
     for level in range(len(info["difficulty"])):
         baseDir = f"PhichainProject/{levels[level]}/{id}"
         os.mkdir(baseDir)
-        with open(baseDir+"/meta.json", 'w') as f:
+        with open(baseDir+"/meta.json", 'w', encoding = 'utf-8') as f:
             f.write("{")
             f.write(f'"composer": {info["Composer"]},')
             f.write(f'"charter": {info["Chater"][level]},')

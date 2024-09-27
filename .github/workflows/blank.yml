@@ -4,11 +4,13 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: windows-latest
-
+    strategy:
+      fail-fast: true
     steps:
     - uses: actions/checkout@v4
     - name: Set up ffmpeg and ffprobe 

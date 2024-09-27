@@ -54,7 +54,7 @@ jobs:
     - name: Release Assests
       run: |
         cd Phigros_Resource
-        python -m pip install UnityPy fsb5 rich
+        python -m pip install UnityPy~=1.10.14 fsb5 rich
         python gameInformation.py com.PigeonGames.Phigros.apk
         python resource.py ".\\Android\\obb\\com.PigeonGames.Phigros"
       env:

@@ -67,7 +67,7 @@ jobs:
     - name: Generate Phira Charts
       run: |
         cd Phigros_Resource
-        python phira.py --rpe
+        python phira.py --phira
       env:
         PYTHONIOENCODING: utf-8
     - name: Generate Phichain Charts

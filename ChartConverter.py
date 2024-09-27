@@ -16,7 +16,7 @@ for difficultyDir in [EZ, HD, IN, AT]:
 		chartPath = os.path.join(difficultyDir, chartName)
 		processes.append(subprocess.Popen(converter+' --input official '+'--output rpe '+chartPath))
 for p in processes:
-    p.wait()
+	p.wait()
 processes = []
 for difficultyDir in [EZ, HD, IN, AT]:
 	for chartName in os.listdir(difficultyDir):
@@ -26,5 +26,5 @@ for difficultyDir in [EZ, HD, IN, AT]:
 		chartPath = os.path.join(difficultyDir, chartName)
 		processes.append(subprocess.Popen(converter+' --input rpe'+' --output official '+chartPath))
 for p in processes:
-    p.wait()
-    
+	p.wait()
+	

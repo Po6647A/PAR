@@ -20,11 +20,10 @@ for p in processes:
 processes = []
 for difficultyDir in [EZ, HD, IN, AT]:
 	for chartName in os.listdir(difficultyDir):
-		name, extension = os.path.splitext(chartName)
-		chartName = name + '.rpe' + extension
-		print(chartName)
-		chartPath = os.path.join(difficultyDir, chartName)
-		processes.append(subprocess.Popen(converter+' --input rpe'+' --output official '+chartPath))
+		if chartName.endswith('.rpe.json'):
+			print(chartName)
+			chartPath = os.path.join(difficultyDir, chartName)
+			processes.append(subprocess.Popen(converter+' --input rpe'+' --output official '+chartPath))
 for p in processes:
 	p.wait()
 	

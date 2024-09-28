@@ -41,7 +41,7 @@ for id, info in track(infos.items(), description = "WritingPhichainProject..."):
             f.write(f'"level": {info["difficulty"][level]}')
             f.write("}")
         shutil.copy(f"Phigros_Resource/Chart_{levels[level]}/{id}.0.json", baseDir)
-        os.rename(baseDir+f'\\{id}.json',"chart.json")
+        os.rename(baseDir+f'\\{id}.0.json',"chart.json")
         shutil.copy(f"Phigros_Resource/Illustration/{id}.png", baseDir)
         os.rename(baseDir+f'\\{id}.png',"illustration.png")
         shutil.copy(f"Phigros_Resource/music/{id}.ogg", baseDir)

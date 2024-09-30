@@ -1,4 +1,4 @@
-name: Test
+name: Sync Data
 on:
   push:
     branches: [main]
@@ -13,6 +13,15 @@ jobs:
       fail-fast: true
     steps:
     - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
+      with:
+        repository: westhecool/python-apkpure
+    - uses: actions/checkout@v4
+      with:
+        repository: 364hao/Phigros_Resource
+    - uses: actions/checkout@v4
+      with:
+        repository: Ivan-1F/phichain
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
     - name: Set up Rust toolchain
@@ -21,17 +30,11 @@ jobs:
         toolchain: stable
         targets: x86_64-unknown-linux-gnu
         components: rustfmt, clippy
-    - name: Clone Project
-      run: |
-        git clone https://github.com/westhecool/python-apkpure.git --depth 1
-        git clone https://github.com/364hao/Phigros_Resource.git --depth 1
-        git clone https://github.com/Ivan-1F/phichain.git --depth 1
     - name: Build Phichain
       run: |
         cd phichain
         sudo apt-get update
-        sudo apt-get install -y g++ pkg-config libx11-dev libasound2-dev libudev-dev libxkbcommon-x11-0
-        sudo apt-get install -y libwayland-dev libxkbcommon-dev
+        sudo apt-get install -y g++ pkg-config libx11-dev libasound2-dev libudev-dev libxkbcommon-x11-0 libwayland-dev libxkbcommon-dev
         cargo build -p phichain-converter --release --target x86_64-unknown-linux-gnu
         cp target/x86_64-unknown-linux-gnu/release/phichain-converter ../phichain-converter
       env:

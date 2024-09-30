@@ -58,17 +58,13 @@ jobs:
     - name: Convert Charts
       run: |
         python ChartConverter.py
+        python ChartPcTs.py
       env:
         PYTHONIOENCODING: utf-8
     - name: Generate Phira Charts
       run: |
         cd Phigros_Resource
         python phira.py --phira
-      env:
-        PYTHONIOENCODING: utf-8
-    - name: Generate Phichain Charts
-      run: |
-        python ChartPcTs.py
       env:
         PYTHONIOENCODING: utf-8
     - name: Delete Release

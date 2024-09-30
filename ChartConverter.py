@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-converter = os.path.abspath('phichain-converter.exe')
+converter = os.path.abspath('phichain-converter')
 resourceDir = os.path.abspath('Phigros_Resource')
 
 processes = []

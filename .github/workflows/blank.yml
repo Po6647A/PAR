@@ -8,7 +8,7 @@ on:
 
 jobs:
   Sync_Data:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     strategy:
       fail-fast: true
     steps:
@@ -23,15 +23,13 @@ jobs:
       uses: dtolnay/rust-toolchain@stable
       with:
         toolchain: stable
-        targets: x86_64-unknown-linux-gnu
+        targets: x86_64-pc-windows-msvc
         components: rustfmt, clippy
     - name: Build Phichain
       run: |
         cd phichain
-        sudo apt-get update
-        sudo apt-get install -y g++ pkg-config libx11-dev libasound2-dev libudev-dev libxkbcommon-x11-0 libwayland-dev libxkbcommon-dev
-        cargo build -p phichain-converter --release --target x86_64-unknown-linux-gnu
-        cp target/x86_64-unknown-linux-gnu/release/phichain-converter ../phichain-converter
+        cargo build -p phichain-converter --release --target x86_64-pc-windows-msvc
+        move target/x86_64-unknown-linux-gnu/release/phichain-converter.exe ../phichain-converter.exe
       env:
         RUST_BACKTRACE: 1
     - name: Download Phigros Package
@@ -47,7 +45,6 @@ jobs:
     - name: Release Assests
       run: |
         cd Phigros_Resource
-        sudo apt-get install libogg-dev libvorbis-dev
         python -m pip install UnityPy==1.10.18 fsb5 rich
         python gameInformation.py com.PigeonGames.Phigros.apk
         python resource.py Android/obb/com.PigeonGames.Phigros
@@ -59,12 +56,6 @@ jobs:
         python ChartPcTs.py
       env:
         PYTHONIOENCODING: utf-8
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: Zip
-        path: |
-          ./
     - name: Generate Phira Charts
       run: |
         cd Phigros_Resource

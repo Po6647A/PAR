@@ -1,4 +1,4 @@
-name: Sync Data
+name: Run
 on:
   push:
     branches: [main]
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  Sync_Data:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true

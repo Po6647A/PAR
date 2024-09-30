@@ -16,12 +16,15 @@ jobs:
     - uses: actions/checkout@v4
       with:
         repository: westhecool/python-apkpure
+        path: Test
     - uses: actions/checkout@v4
       with:
         repository: 364hao/Phigros_Resource
+        path: Test
     - uses: actions/checkout@v4
       with:
         repository: Ivan-1F/phichain
+        path: Test
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
     - name: Set up Rust toolchain

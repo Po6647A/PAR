@@ -13,18 +13,10 @@ jobs:
       fail-fast: true
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/checkout@v4
-      with:
-        repository: westhecool/python-apkpure
-        path: Test
-    - uses: actions/checkout@v4
-      with:
-        repository: 364hao/Phigros_Resource
-        path: Test
-    - uses: actions/checkout@v4
-      with:
-        repository: Ivan-1F/phichain
-        path: Test
+    - run: |
+        git clone https://github.com/westhecool/python-apkpure.git --depth 1
+        git clone https://github.com/364hao/Phigros_Resource.git --depth 1
+        git clone https://github.com/Ivan-1F/phichain.git --depth 1
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
     - name: Set up Rust toolchain

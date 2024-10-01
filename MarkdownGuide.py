@@ -48,8 +48,16 @@ if __name__ =='__main__':
 	versionDir = os.path.join(os.path.abspath('docs'), version)
 	if not os.path.exists(versionDir):
 		os.mkdir(versionDir)
-		with open(os.path.join(versionDir, 'SUMMARY.md'), 'w', encoding = 'utf-8') as main:
-			for name, info in getInfos():
+		with open(os.path.join(versionDir, 'README.md'), 'w', encoding = 'utf-8') as commit:
+			infos = getInfos()
+			commit.write(
+				f'''
+				# Phigros 版本/Phigros Version:  {version}
+				
+				# 总计 {len(infos)} 曲目 /Total {len(infos)} songs
+				'''
+			)
+			for name, info in infos:
 				path = os.path.join(versionDir, name)
 				os.mkdir(path)
 				music = os.path.join(musicPath, f'{name}.ogg')
@@ -142,8 +150,17 @@ if __name__ =='__main__':
 								- ### __谱面文件(json格式)(RPE版本)/Chart File(json Format)(RPE ver.)[下载/Download](./{name}.0.rpe.json)__
 								'''
 							)
+				commit.write(
+					f'''
+					
+					### [{name}-{info['Composer']}](./{name}/README.md)
+					
+					'''
+				)
+		with open(os.path.join('docs', 'SUMMARY.md'), 'a', encoding = 'utf-8') as main:
 			main.write(
 				f'''
+				- [{version}](./{version}/README.md)
 				
 				'''
 			)

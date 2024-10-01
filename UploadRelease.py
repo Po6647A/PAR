@@ -29,5 +29,5 @@ if __name__ == '__main__':
         upload(r, os.path.join(resDir, 'music-info.json'))
         upload(r, os.path.join(resDir, 'tips.txt'))
         upload(r, os.path.join(resDir, 'single.txt'))
-    except GithubException as e:
-        print(e)
+    except:
+        pass

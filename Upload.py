@@ -16,7 +16,7 @@ def upload(release, filepath):
         content_type = "application/octet-stream"
     )
 if __name__ == '__main__':
-    g = Github(os.envi1ron.get('GITHUB_TOKEN'))
+    g = Github(os.environ.get('GITHUB_TOKEN'))
     repo = g.get_repo("364hao/Test")
     resDir = os.path.abspath('Phigros_Resource')
     with open(os.path.join(resDir, 'manifest.json'), 'r', encoding = 'utf-8') as f:

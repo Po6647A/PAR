@@ -81,7 +81,9 @@ if __name__ =='__main__':
 						- ### __曲绘(模糊)/IllustrationBlur:  [下载/Download](./{name}(Blur).png)__
 						'''
 					)
-					for index, difficulty in enumerate(info["difficulty"]):
+					levels = ['EZ', 'HD', 'IN', 'AT']
+					for index, level in enumerate(info['difficulty']):
+						difficulty = levels[index]
 						chartsPath = os.path.join(path, difficulty)
 						os.mkdir(chartsPath)
 						basename = os.path.join(resPath, f'Chart_{difficulty}', name)
@@ -90,23 +92,52 @@ if __name__ =='__main__':
 						phirachart = os.path.join(basename, '0.rpe.official.json')
 						pez = os.path.join(phiraPath, difficulty, name + f'-{difficulty}.pez')
 						phirapez = os.path.join(phiraPath, difficulty, name + f'-{difficulty}(Phira ver.).pez')
+						rpepez = os.path.join(phiraPath, difficulty, name + f'-{difficulty}(RPE ver.).pez')
 						copy(pez, chartsPath)
 						copy(phirapez, chartsPath)
+						copy(rpepez, chartsPath)
 						copy(pez, os.path.join(chartsPath, f'{name}-{difficulty}.zip'))
 						copy(phirapez, os.path.join(chartsPath, f'{name}-{difficulty}(Phira ver.).zip'))
+						copy(rpepez, os.path.join(chartsPath, f'{name}-{difficulty}(RPE ver.).zip'))
 						copy(origchart, chartsPath)
 						copy(rpechart, chartsPath)
 						copy(phirachart, chartsPath)
 						PhichainProject = os.path.join(PhichainProjectPath, difficulty, name)
-						with ZipFile(os.path.join(chartsPath, f'PhichainProject ver.zip'),'w') as f:
+						with ZipFile(os.path.join(chartsPath, f'{name}-{difficulty}(PhichainProject ver.).zip'),'w') as f:
 							zipwrite(f, os.path.join(PhichainProject, 'chart.json'))
 							zipwrite(f, os.path.join(PhichainProject, 'meta.json'))
 							zipwrite(f, os.path.join(PhichainProject, 'music.ogg'))
 							zipwrite(f, os.path.join(PhichainProject, 'illustration.png'))
 						single.write(
 							f'''
-							- ### __{difficulty}谱面/{difficulty} chart:   [查看/View](./{difficulty}/README.md)__
+							- ### __{level}谱面/{level} chart:  [查看/View](./{difficulty}/README.md)__
 							'''
 						)
 						with open(os.path.join(chartsPath, 'README.md'),'w',encoding='utf-8') as chart:
-							chart.write()
+							chart.write(
+								f'''
+								# Phigros 版本/Phigros Version:  {version}
+								
+								# __{info['Name']} - {level}__
+								
+								- ### __谱面文件(Pez格式)/Chart File(Pez Format):  [下载/Download](./{name}-{difficulty}.pez)__
+								
+								- ### __谱面文件(Zip格式)/Chart File(Zip Format):  [下载/Download](./{name }-{difficulty}.zip)__
+								
+								- ### __谱面文件(Pez格式)(Phira版本)/Chart File(Pez Format)(Phira ver.):   [下载/Download](./{name}-{difficulty}(Phira ver.).pez)__
+								
+								- ### __谱面文件(Zip格式)(Phira版本)/Chart File(Zip Format)(Phira ver.):   [下载/Download](./{name}-{difficulty}(Phira ver.).zip)__
+								
+								- ### __谱面文件(Pez格式)(RPE版本)/Chart File(Pez Format)(RPE ver.):   [下载/Download](./{name}-{difficulty}(RPE ver.).pez)__
+								
+								- ### __谱面文件(Zip格式)(RPE版本)/Chart File(Zip Format)(RPE ver.):   [下载/Download](./{name}-{difficulty}(RPE ver.).zip)__
+								
+								- ### __谱面文件(Zip格式)(Phichain版本)/Chart File(Phichain ver.):   [下载/Download](./{name}-{difficulty}(PhichainProject ver.).zip)__
+								
+								- ### __谱面文件(json格式)/Chart File(json Format)[下载/Download](./{name}.0.json)__
+								
+								- ### __谱面文件(json格式)(Phira版本)/Chart File(json Format)(Phira ver.)[下载/Download](./{name}.0.rpe.official.json)__
+								
+								- ### __谱面文件(json格式)(RPE版本)/Chart File(json Format)(RPE ver.)[下载/Download](./{name}.0.rpe.json)__
+								'''
+							)

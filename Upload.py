@@ -24,7 +24,8 @@ if __name__ == '__main__':
         if not exist_release(repo, version):
             release = repo.create_git_release(
                 tag = version,
-                name = f'Version {version} full assests'
+                name = f'Version {version} full assests',
+                message = "From Apkpure, Github Action bot Generate"
             )
             upload(os.path.join(resDir, 'icon.png'))
             upload(os.path.join(resDir, 'difficulty.tsv'))

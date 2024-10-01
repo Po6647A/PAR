@@ -20,10 +20,10 @@ if __name__ == '__main__':
     repo = g.get_repo("364hao/Test")
     resDir = os.path.abspath('Phigros_Resource')
     with open(os.path.join(resDir, 'manifest.json'), 'r', encoding = 'utf-8') as f:
-        version = 'v' + json.load(f)['version_name']
+        version = json.load(f)['version_name']
     if not exist_release(repo, version):
         r = repo.create_git_release(
-            tag = version,
+            tag = 'v' + version,
             name = f'Version {version} full assests',
             message = "From Apkpure, Github Action bot Generate"
         )

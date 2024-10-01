@@ -1,5 +1,6 @@
 import os
 import shutil
+import json
 from zipfile import ZipFile
 
 def getInfos():
@@ -47,7 +48,7 @@ if __name__ =='__main__':
 	versionDir = os.path.join(os.path.abspath('docs'), version)
 	if not os.path.exists(versionDir):
 		os.mkdir(versionDir)
-		with open(os.path.join(versionDir, 'README.md'), 'w', encoding = 'utf-8') as main:
+		with open(os.path.join(versionDir, 'SUMMARY.md'), 'w', encoding = 'utf-8') as main:
 			for name, info in getInfos():
 				path = os.path.join(versionDir, name)
 				os.mkdir(path)
@@ -141,3 +142,8 @@ if __name__ =='__main__':
 								- ### __谱面文件(json格式)(RPE版本)/Chart File(json Format)(RPE ver.)[下载/Download](./{name}.0.rpe.json)__
 								'''
 							)
+			main.write(
+				f'''
+				
+				'''
+			)

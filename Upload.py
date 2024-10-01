@@ -23,7 +23,7 @@ if __name__ == '__main__':
         version = 'v' + json.load(f)['version_name']
         if not exist_release(repo, version):
             release = repo.create_git_release(
-                tag_name = version,
+                tag = version,
                 name = f'Version {version} full assests'
             )
             upload(os.path.join(resDir, 'icon.png'))

@@ -43,7 +43,12 @@ if __name__ =='__main__':
 	PhichainProjectPath = os.path.abspath('PhichainProject')
 	with open(os.path.join('Phigros_Resource', 'manifest.json'), 'r', encoding = 'utf-8') as f:
 		version = json.load(f)['version_name']
-	versionDir = os.path.join(os.path.abspath('src'), version)
+	srcDir = os.path.join(os.path.abspath('src'))
+	if not os.path.exists(srcDir):
+		os.mkdir(srcDir)
+	versionDir = os.path.join(srcDir, version)
+	if not os.path.exists(os.path.abspath('book')):
+		os.mkdir(os.path.abspath('book'))
 	if not os.path.exists(versionDir):
 		os.mkdir(versionDir)
 		with open(os.path.join(versionDir, 'README.md'), 'w', encoding = 'utf-8') as commit:

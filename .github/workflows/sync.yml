@@ -78,7 +78,6 @@ jobs:
         mdbook-version: 'latest'
     - name: Build Documentation
       run: |
-        mdbook init
         python MarkdownGuide.py
         mdbook build
       env:

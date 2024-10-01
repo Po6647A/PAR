@@ -2,13 +2,6 @@ from github import Github, Auth
 import json
 import os
 
-def exist_release(repo, tag_name):
-    releases = repo.get_releases()
-    for release in releases:
-        if release.tag_name == tag_name:
-            return True
-    return False
-
 def upload(release, filepath):
     release.upload_asset(
         path = filepath,
@@ -21,7 +14,7 @@ if __name__ == '__main__':
     resDir = os.path.abspath('Phigros_Resource')
     with open(os.path.join(resDir, 'manifest.json'), 'r', encoding = 'utf-8') as f:
         version = json.load(f)['version_name']
-    if not exist_release(repo, version):
+    try:
         r = repo.create_git_release(
             tag = 'v' + version,
             name = f'Version {version} full assests',
@@ -36,4 +29,5 @@ if __name__ == '__main__':
         upload(r, os.path.join(resDir, 'music-info.json'))
         upload(r, os.path.join(resDir, 'tips.txt'))
         upload(r, os.path.join(resDir, 'single.txt'))
-        
+    except GithubException as e:
+        print(e)

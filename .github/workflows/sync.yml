@@ -72,18 +72,14 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PYTHONIOENCODING: utf-8
-    - name: Generate Markdown Lead
-      run: |
-        python MarkdownGuide.py
-      env:
-        PYTHONIOENCODING: utf-8
     - name: Setup mdBook
       uses: peaceiris/actions-mdbook@v2
       with:
         mdbook-version: 'latest'
     - name: Build Documentation
       run: |
-        cd docs
+        mdbook init
+        python MarkdownGuide.py
         mdbook build
       env:
         PYTHONIOENCODING: utf-8

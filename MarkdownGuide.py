@@ -41,11 +41,9 @@ if __name__ =='__main__':
 	IllustrationBlurPath = os.path.join(resPath, 'IllustrationBlur')
 	IllustrationLowResPath = os.path.join(resPath, 'IllustrationLowRes')
 	PhichainProjectPath = os.path.abspath('PhichainProject')
-	if not os.path.exists('docs'):
-		os.mkdir('docs')
 	with open(os.path.join('Phigros_Resource', 'manifest.json'), 'r', encoding = 'utf-8') as f:
 		version = json.load(f)['version_name']
-	versionDir = os.path.join(os.path.abspath('docs'), version)
+	versionDir = os.path.join(os.path.abspath('src'), version)
 	if not os.path.exists(versionDir):
 		os.mkdir(versionDir)
 		with open(os.path.join(versionDir, 'README.md'), 'w', encoding = 'utf-8') as commit:
@@ -157,7 +155,7 @@ if __name__ =='__main__':
 					
 					'''
 				)
-		with open(os.path.join('docs', 'SUMMARY.md'), 'a', encoding = 'utf-8') as main:
+		with open(os.path.join('src', 'SUMMARY.md'), 'a', encoding = 'utf-8') as main:
 			main.write(
 				f'''
 				- [{version}](./{version}/README.md)

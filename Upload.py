@@ -22,18 +22,18 @@ if __name__ == '__main__':
     with open(os.path.join(resDir, 'manifest.json'), 'r', encoding = 'utf-8') as f:
         version = 'v' + json.load(f)['version_name']
     if not exist_release(repo, version):
-        release = repo.create_git_release(
+        r = repo.create_git_release(
             tag = version,
             name = f'Version {version} full assests',
             message = "From Apkpure, Github Action bot Generate"
         )
-        upload(os.path.join(resDir, 'icon.png'))
-        upload(os.path.join(resDir, 'difficulty.tsv'))
-        upload(os.path.join(resDir, 'collection.tsv'))
-        upload(os.path.join(resDir, 'avatar.txt'))
-        upload(os.path.join(resDir, 'illustration.txt'))
-        upload(os.path.join(resDir, 'info.tsv'))
-        upload(os.path.join(resDir, 'music-info.json'))
-        upload(os.path.join(resDir, 'tips.txt'))
-        upload(os.path.join(resDir, 'single.txt'))
+        upload(r, os.path.join(resDir, 'icon.png'))
+        upload(r, os.path.join(resDir, 'difficulty.tsv'))
+        upload(r, os.path.join(resDir, 'collection.tsv'))
+        upload(r, os.path.join(resDir, 'avatar.txt'))
+        upload(r, os.path.join(resDir, 'illustration.txt'))
+        upload(r, os.path.join(resDir, 'info.tsv'))
+        upload(r, os.path.join(resDir, 'music-info.json'))
+        upload(r, os.path.join(resDir, 'tips.txt'))
+        upload(r, os.path.join(resDir, 'single.txt'))
         

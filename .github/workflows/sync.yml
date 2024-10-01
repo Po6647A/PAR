@@ -73,8 +73,6 @@ jobs:
         python MarkdownGuide.py
       env:
         PYTHONIOENCODING: utf-8
-    - name: Checkout Repository
-      uses: actions/checkout@v4
     - name: Setup mdBook
       uses: peaceiris/actions-mdbook@v2
       with:

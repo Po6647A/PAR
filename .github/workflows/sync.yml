@@ -73,10 +73,6 @@ jobs:
         python MarkdownGuide.py
       env:
         PYTHONIOENCODING: utf-8
-  Build_Documentation:
-    needs: Sync_Data
-    runs-on: ubuntu-latest
-    steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
     - name: Setup mdBook

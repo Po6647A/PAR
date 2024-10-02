@@ -1,24 +1,31 @@
 from github import Github, Auth
 import json
 import os
+import threading
 from MarkdownGuide import main
 
 def upload(release, filepath, name = None):
+    global uploadQueue
     if os.path.exists(filepath):
         if name == None:
             name = os.path.basename(filepath)
         try:
-            release.upload_asset(
-                path = filepath,
-                name = name,
-                content_type = "application/octet-stream"
+            t = threading.Thread(target = release.upload_asset(
+                    path = filepath,
+                    name = name,
+                    content_type = "application/octet-stream"
+                ),
+                daemon = True
             )
+            t.start()
+            uploadQueue.append(t)
         except:
             pass
 if __name__ == '__main__':
     g = Github(auth = Auth.Token(os.environ.get('GITHUB_TOKEN')))
     repo = g.get_repo("364hao/Test")
     resDir = os.path.abspath('Phigros_Resource')
+    uploadQueue = []
     with open(os.path.join(resDir, 'manifest.json'), 'r', encoding = 'utf-8') as f:
         version = json.load(f)['version_name']
     try:
@@ -37,5 +44,7 @@ if __name__ == '__main__':
         upload(r, os.path.join(resDir, 'tips.txt'))
         upload(r, os.path.join(resDir, 'single.txt'))
         main(upload, r)
+        for p in uploadQueue:
+            p.join()
     except:
         pass

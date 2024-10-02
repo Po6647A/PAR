@@ -72,6 +72,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PYTHONIOENCODING: utf-8
+    - uses: actions/upload-artifact@v4
+      path: ./
     - name: Setup mdBook
       uses: peaceiris/actions-mdbook@v2
       with:

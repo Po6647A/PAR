@@ -6,7 +6,7 @@ from zipfile import ZipFile
 def getInfos():
 	resPath = os.path.abspath('Phigros_Resource')
 	infos = {}
-	with open(os.path.join(resPath, 'info.tsv'), encoding = 'utf8') as f:
+	with open(os.path.join(resPath, 'info.tsv'), encoding = 'utf-8') as f:
 		while True:
 			line = f.readline()
 			if not line:
@@ -14,7 +14,7 @@ def getInfos():
 			line = line[:-1].split('\t')
 			infos[line[0]] = {'Name': line[1], 'Composer': line[2], 'Illustrator': line[3], 'Charter': line[4:]}
 			
-	with open(os.path.join(resPath, 'difficulty.tsv'), encoding = 'utf8') as f:
+	with open(os.path.join(resPath, 'difficulty.tsv'), encoding = 'utf-8') as f:
 		while True:
 			line = f.readline()
 			if not line:
@@ -58,6 +58,7 @@ def main(upload, release):
 			for name, info in infos:
 				path = os.path.join(versionDir, name)
 				os.mkdir(path)
+				print(name, info)
 				music = os.path.join(musicPath, f'{name}.ogg')
 				upload(release, music)
 				Illustration = os.path.join(IllustrationPath, f'{name}.png')

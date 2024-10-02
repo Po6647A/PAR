@@ -1,7 +1,6 @@
 from github import Github, Auth
 import json
 import os
-import threading
 from MarkdownGuide import main
 
 def upload(release, filepath, name = None):
@@ -10,16 +9,11 @@ def upload(release, filepath, name = None):
         if name == None:
             name = os.path.basename(filepath)
         try:
-            t = threading.Thread(
-                target = release.upload_asset,
-                kwargs = {
-                    'path': filepath,
-                    'name': name,
-                    'content_type': "application/octet-stream"
-                }
+            release.upload_asset(
+                path = filepath,
+                name = name,
+                content_type = "application/octet-stream"
             )
-            t.start()
-            uploadQueue.append(t)
         except:
             pass
 if __name__ == '__main__':
@@ -45,7 +39,5 @@ if __name__ == '__main__':
         upload(r, os.path.join(resDir, 'tips.txt'))
         upload(r, os.path.join(resDir, 'single.txt'))
         main(upload, r)
-        for p in uploadQueue:
-            p.join()
     except:
         pass

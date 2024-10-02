@@ -116,6 +116,7 @@ def main(upload, release):
 							zipwrite(f, os.path.join(PhichainProject, 'music.ogg'))
 							zipwrite(f, os.path.join(PhichainProject, 'illustration.png'))
 						upload(release, Phichain)
+						os.remove(Phichain)
 						single.write(
 							f'''
 							- ### __{level}谱面/{level} chart:  [查看/View](./{difficulty}/README.md)__

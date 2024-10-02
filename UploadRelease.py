@@ -10,7 +10,7 @@ def upload(release, filepath, name = None):
         try:
             release.upload_asset(
                 path = filepath,
-                label = name,
+                name = name,
                 content_type = "application/octet-stream"
             )
         except:

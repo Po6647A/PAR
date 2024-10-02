@@ -81,6 +81,9 @@ jobs:
         mdbook build
       env:
         PYTHONIOENCODING: utf-8
+    - uses: actions/upload-artifact@v4.4.0
+      with:
+        path: ./src
     - name: Deploy Documentation
       uses: peaceiris/actions-gh-pages@v4
       with:

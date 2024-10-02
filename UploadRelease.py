@@ -21,18 +21,21 @@ if __name__ == '__main__':
     resDir = os.path.abspath('Phigros_Resource')
     with open(os.path.join(resDir, 'manifest.json'), 'r', encoding = 'utf-8') as f:
         version = json.load(f)['version_name']
-    r = repo.create_git_release(
-        tag = 'v' + version,
-        name = f'Version {version} full assests',
-        message = "From Apkpure, Github Action bot Generate"
-    )
-    upload(r, os.path.join(resDir, 'icon.png'))
-    upload(r, os.path.join(resDir, 'difficulty.tsv'))
-    upload(r, os.path.join(resDir, 'collection.tsv'))
-    upload(r, os.path.join(resDir, 'avatar.txt'))
-    upload(r, os.path.join(resDir, 'illustration.txt'))
-    upload(r, os.path.join(resDir, 'info.tsv'))
-    upload(r, os.path.join(resDir, 'music-info.json'))
-    upload(r, os.path.join(resDir, 'tips.txt'))
-    upload(r, os.path.join(resDir, 'single.txt'))
-    main(upload, r)
+    try:
+        r = repo.create_git_release(
+            tag = 'v' + version,
+            name = f'Version {version} full assests',
+            message = "From Apkpure, Github Action bot Generate"
+        )
+        upload(r, os.path.join(resDir, 'icon.png'))
+        upload(r, os.path.join(resDir, 'difficulty.tsv'))
+        upload(r, os.path.join(resDir, 'collection.tsv'))
+        upload(r, os.path.join(resDir, 'avatar.txt'))
+        upload(r, os.path.join(resDir, 'illustration.txt'))
+        upload(r, os.path.join(resDir, 'info.tsv'))
+        upload(r, os.path.join(resDir, 'music-info.json'))
+        upload(r, os.path.join(resDir, 'tips.txt'))
+        upload(r, os.path.join(resDir, 'single.txt'))
+        main(upload, r)
+    except:
+        pass

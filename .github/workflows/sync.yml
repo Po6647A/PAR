@@ -53,6 +53,9 @@ jobs:
         python resource.py Android/obb/com.PigeonGames.Phigros
       env:
         PYTHONIOENCODING: utf-8
+    - uses: actions/upload-artifact@v4
+      with:
+        path: ./Phigros_Resource/
     - name: Convert Charts
       run: |
         python ChartConvert.py
@@ -72,9 +75,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PYTHONIOENCODING: utf-8
-    - uses: actions/upload-artifact@v4
-      with:
-        path: ./
     - name: Setup mdBook
       uses: peaceiris/actions-mdbook@v2
       with:

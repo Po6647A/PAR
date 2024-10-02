@@ -7,11 +7,14 @@ def upload(release, filepath, name = None):
     if os.path.exists(filepath):
         if name == None:
             name = os.path.basename(filepath)
-        release.upload_asset(
-            path = filepath,
-            label = name,
-            content_type = "application/octet-stream"
-        )
+        try:
+            release.upload_asset(
+                path = filepath,
+                label = name,
+                content_type = "application/octet-stream"
+            )
+        except:
+            pass
 if __name__ == '__main__':
     g = Github(auth = Auth.Token(os.environ.get('GITHUB_TOKEN')))
     repo = g.get_repo("364hao/Test")

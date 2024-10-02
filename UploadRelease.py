@@ -1,13 +1,17 @@
 from github import Github, Auth
 import json
 import os
+from MarkdownGuide import main
 
-def upload(release, filepath):
-    release.upload_asset(
-        path = filepath,
-        label = os.path.basename(filepath),
-        content_type = "application/octet-stream"
-    )
+def upload(release, filepath, name = None):
+    if os.path.exists(filepath):
+        if name == None:
+            name = os.path.basename(filepath)
+        release.upload_asset(
+            path = filepath,
+            label = name,
+            content_type = "application/octet-stream"
+        )
 if __name__ == '__main__':
     g = Github(auth = Auth.Token(os.environ.get('GITHUB_TOKEN')))
     repo = g.get_repo("364hao/Test")
@@ -29,5 +33,6 @@ if __name__ == '__main__':
         upload(r, os.path.join(resDir, 'music-info.json'))
         upload(r, os.path.join(resDir, 'tips.txt'))
         upload(r, os.path.join(resDir, 'single.txt'))
+        main(r, upload)
     except:
         pass

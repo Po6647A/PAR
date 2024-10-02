@@ -23,17 +23,11 @@ def getInfos():
 			infos[line[0]]['difficulty'] = line[1:]
 	return infos.items()
 
-def copy(src, dst):
-	if os.path.exists(src):
-		shutil.copy(src, dst)
-def rename(src, dst):
-	if os.path.exists(src):
-		os.rename(src, dst)
 def zipwrite(f, src):
 	if os.path.exists(src):
 		f.write(src)
 
-if __name__ =='__main__':
+def main(upload, release):
 	resPath = os.path.abspath('Phigros_Resource')
 	phiraPath = os.path.join(resPath, 'phira')
 	musicPath = os.path.join(resPath, 'music')
@@ -43,6 +37,7 @@ if __name__ =='__main__':
 	PhichainProjectPath = os.path.abspath('PhichainProject')
 	with open(os.path.join('Phigros_Resource', 'manifest.json'), 'r', encoding = 'utf-8') as f:
 		version = json.load(f)['version_name']
+	downPath = f'''https://github.com/364hao/Test/releases/download/v{version}'''
 	srcDir = os.path.join(os.path.abspath('src'))
 	if not os.path.exists(srcDir):
 		os.mkdir(srcDir)
@@ -64,15 +59,13 @@ if __name__ =='__main__':
 				path = os.path.join(versionDir, name)
 				os.mkdir(path)
 				music = os.path.join(musicPath, f'{name}.ogg')
-				copy(music, path)
+				upload(release, music)
 				Illustration = os.path.join(IllustrationPath, f'{name}.png')
-				copy(Illustration, path)
+				upload(release, Illustration)
 				IllustrationLowRes = os.path.join(IllustrationLowResPath, f'{name}.png')
-				rename(IllustrationLowRes, os.path.join(IllustrationLowResPath, f'{name}(Low).png'))
-				copy(os.path.join(IllustrationLowResPath, f'{name}(Low).png'), path)
+				upload(release, IllustrationLowRes, f'{name}(Low).png')
 				IllustrationBlur = os.path.join(IllustrationBlurPath, f'{name}.png')
-				rename(IllustrationBlur, os.path.join(IllustrationLowResPath, f'{name}(Blur).png'))
-				copy(os.path.join(IllustrationLowResPath, f'{name}(Blur).png'), path)
+				upload(release, IllustrationBlur, f'{name}(Blur).png')
 				with open(os.path.join(path, 'README.md'), 'w', encoding = 'utf-8') as single:
 					single.write(
 						f'''
@@ -84,13 +77,13 @@ if __name__ =='__main__':
 						
 						- ### __曲绘画师/Illustrator:  {info['Illustrator']}__
 						
-						- ### __曲绘/Illustration:  [下载/Download](./{name}.png)__
+						- ### __曲绘/Illustration:  [下载/Download]({downPath}/{name}.png)__
 						
-						- ### __音频/Music:  [下载/Download](./{name}.ogg)__
+						- ### __音频/Music:  [下载/Download]({downPath}/{name}.ogg)__
 						
-						- ### __曲绘(低质量)/IllustrationLowRes:  [下载/Download](./{name}(Low).png)__
+						- ### __曲绘(低质量)/IllustrationLowRes:  [下载/Download]({downPath}/{name}(Low).png)__
 						
-						- ### __曲绘(模糊)/IllustrationBlur:  [下载/Download](./{name}(Blur).png)__
+						- ### __曲绘(模糊)/IllustrationBlur:  [下载/Download]({downPath}/{name}(Blur).png)__
 						'''
 					)
 					levels = ['EZ', 'HD', 'IN', 'AT']
@@ -105,21 +98,23 @@ if __name__ =='__main__':
 						pez = os.path.join(phiraPath, difficulty, name + f'-{difficulty}.pez')
 						phirapez = os.path.join(phiraPath, difficulty, name + f'-{difficulty}(Phira ver.).pez')
 						rpepez = os.path.join(phiraPath, difficulty, name + f'-{difficulty}(RPE ver.).pez')
-						copy(pez, chartsPath)
-						copy(phirapez, chartsPath)
-						copy(rpepez, chartsPath)
-						copy(pez, os.path.join(chartsPath, f'{name}-{difficulty}.zip'))
-						copy(phirapez, os.path.join(chartsPath, f'{name}-{difficulty}(Phira ver.).zip'))
-						copy(rpepez, os.path.join(chartsPath, f'{name}-{difficulty}(RPE ver.).zip'))
-						copy(origchart, chartsPath)
-						copy(rpechart, chartsPath)
-						copy(phirachart, chartsPath)
+						upload(release, pez)
+						upload(release, pez, f'{name}-{difficulty}.zip')
+						upload(release, phirapez)
+						upload(release, phirapez, f'{name}-{difficulty}(Phira ver.).zip')
+						upload(release, rpepez)
+						upload(release, rpepez, f'{name}-{difficulty}(RPE ver.).zip')
+						upload(release, origchart, f'{name}-{difficulty}.json')
+						upload(release, rpechart, f'{name}-{difficulty}(RPE ver.).json')
+						upload(release, phirachart, f'{name}-{difficulty}(Phira ver.).json')
 						PhichainProject = os.path.join(PhichainProjectPath, difficulty, name)
-						with ZipFile(os.path.join(chartsPath, f'{name}-{difficulty}(PhichainProject ver.).zip'),'w') as f:
+						Phichain = os.path.join(chartsPath, f'{name}-{difficulty}(PhichainProject ver.).zip')
+						with ZipFile(Phichain , 'w') as f:
 							zipwrite(f, os.path.join(PhichainProject, 'chart.json'))
 							zipwrite(f, os.path.join(PhichainProject, 'meta.json'))
 							zipwrite(f, os.path.join(PhichainProject, 'music.ogg'))
 							zipwrite(f, os.path.join(PhichainProject, 'illustration.png'))
+						upload(release, Phichain)
 						single.write(
 							f'''
 							- ### __{level}谱面/{level} chart:  [查看/View](./{difficulty}/README.md)__
@@ -132,25 +127,26 @@ if __name__ =='__main__':
 								
 								# __{info['Name']} - {level}__
 								
-								- ### __谱面文件(Pez格式)/Chart File(Pez Format):  [下载/Download](./{name}-{difficulty}.pez)__
+								- ### __谱面文件(Pez格式)/Chart File(Pez Format):  [下载/Download]({downPath}/{name}-{difficulty}.pez)__
 								
-								- ### __谱面文件(Zip格式)/Chart File(Zip Format):  [下载/Download](./{name }-{difficulty}.zip)__
+								- ### __谱面文件(Zip格式)/Chart File(Zip Format):  [下载/Download]({downPath}/{name}-{difficulty}.zip)__
 								
-								- ### __谱面文件(Pez格式)(Phira版本)/Chart File(Pez Format)(Phira ver.):   [下载/Download](./{name}-{difficulty}(Phira ver.).pez)__
+								- ### __谱面文件(Pez格式)(Phira版本)/Chart File(Pez Format)(Phira ver.):   [下载/Download]({downPath}/{name}-{difficulty}(Phira ver.).pez)__
 								
-								- ### __谱面文件(Zip格式)(Phira版本)/Chart File(Zip Format)(Phira ver.):   [下载/Download](./{name}-{difficulty}(Phira ver.).zip)__
+								- ### __谱面文件(Zip格式)(Phira版本)/Chart File(Zip Format)(Phira ver.):   [下载/Download]({downPath}/{name}-{difficulty}(Phira ver.).zip)__
 								
-								- ### __谱面文件(Pez格式)(RPE版本)/Chart File(Pez Format)(RPE ver.):   [下载/Download](./{name}-{difficulty}(RPE ver.).pez)__
+								- ### __谱面文件(Pez格式)(RPE版本)/Chart File(Pez Format)(RPE ver.):   [下载/Download]({downPath}/{name}-{difficulty}(RPE ver.).pez)__
 								
-								- ### __谱面文件(Zip格式)(RPE版本)/Chart File(Zip Format)(RPE ver.):   [下载/Download](./{name}-{difficulty}(RPE ver.).zip)__
+								- ### __谱面文件(Zip格式)(RPE版本)/Chart File(Zip Format)(RPE ver.):   [下载/Download]({downPath}/{name}-{difficulty}(RPE ver.).zip)__
 								
-								- ### __谱面文件(Zip格式)(Phichain版本)/Chart File(Phichain ver.):   [下载/Download](./{name}-{difficulty}(PhichainProject ver.).zip)__
+								- ### __谱面文件(Zip格式)(Phichain版本)/Chart File(Phichain ver.):   [下载/Download]({downPath}/{name}-{difficulty}(PhichainProject ver.).zip)__
 								
-								- ### __谱面文件(json格式)/Chart File(json Format)[下载/Download](./{name}.0.json)__
+								- ### __谱面文件(json格式)/Chart File(json Format)[下载/Download]({downPath}/{name}-{difficulty}.json)__
 								
-								- ### __谱面文件(json格式)(Phira版本)/Chart File(json Format)(Phira ver.)[下载/Download](./{name}.0.rpe.official.json)__
+								- ### __谱面文件(json格式)(RPE版本)/Chart File(json Format)(RPE ver.)[下载/Download]({downPath}/{name}-{difficulty}(RPE ver.).json)__
 								
-								- ### __谱面文件(json格式)(RPE版本)/Chart File(json Format)(RPE ver.)[下载/Download](./{name}.0.rpe.json)__
+								- ### __谱面文件(json格式)(Phira版本)/Chart File(json Format)(Phira ver.)[下载/Download]({downPath}/{name}-{difficulty}(Phira ver.).json)__
+								
 								'''
 							)
 				commit.write(

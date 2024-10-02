@@ -12,12 +12,12 @@ def upload(release, filepath, name = None):
         try:
             t = threading.Thread(
                 target = release.upload_asset,
-                args = (
-                    path = filepath,
-                    name = name,
-                    content_type = "application/octet-stream"
-                ),
-                daemon = True
+                kwargs = {
+                    'path': filepath,
+                    'name': name,
+                    'content_type': "application/octet-stream"
+                },
+                daemon=True
             )
             t.start()
             uploadQueue.append(t)

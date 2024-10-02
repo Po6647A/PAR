@@ -4,7 +4,6 @@ import os
 from MarkdownGuide import main
 
 def upload(release, filepath, name = None):
-    global uploadQueue
     if os.path.exists(filepath):
         if name == None:
             name = os.path.basename(filepath)
@@ -20,7 +19,6 @@ if __name__ == '__main__':
     g = Github(auth = Auth.Token(os.environ.get('GITHUB_TOKEN')))
     repo = g.get_repo("364hao/Test")
     resDir = os.path.abspath('Phigros_Resource')
-    uploadQueue = []
     with open(os.path.join(resDir, 'manifest.json'), 'r', encoding = 'utf-8') as f:
         version = json.load(f)['version_name']
     try:

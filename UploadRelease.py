@@ -32,4 +32,4 @@ if __name__ == '__main__':
     upload(r, os.path.join(resDir, 'music-info.json'))
     upload(r, os.path.join(resDir, 'tips.txt'))
     upload(r, os.path.join(resDir, 'single.txt'))
-    main(r, upload)
+    main(upload, r)

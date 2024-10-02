@@ -16,8 +16,7 @@ def upload(release, filepath, name = None):
                     'path': filepath,
                     'name': name,
                     'content_type': "application/octet-stream"
-                },
-                daemon=True
+                }
             )
             t.start()
             uploadQueue.append(t)

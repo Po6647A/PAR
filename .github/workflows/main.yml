@@ -18,3 +18,5 @@ jobs:
     - name: Create Release and Upload Assets
       run: |
         gh release create v1.0.0 --title "Version 1.0.0" --notes "Initial release"
+      env:
+        GH_TOKEN: ${{ github.token }}

@@ -5,8 +5,10 @@ from MarkdownGuide import main
 
 def upload(release, filepath, v, name = None):
     if os.path.exists(filepath):
-        if name == None:
-            name = os.path.basename(filepath)
+        if name != None:
+            newpath = os.path.join(os.path.dirname(filepath), name)
+            os.rename(filepath, newpath)
+            filepath = newpath
         subprocess.Popen(
             [
                 'gh',

@@ -1,0 +1,27 @@
+name: GitHub CLI Workflow
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    # 设置 PAT 作为 Secret
+    - name: Setup Personal Access Token
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo $GITHUB_TOKEN | gh auth login --with-token
+
+    # 执行需要认证的操作
+    - name: Create Release and Upload Assets
+      run: |
+        gh release create v1.0.0 --title "Version 1.0.0" --notes "Initial release"

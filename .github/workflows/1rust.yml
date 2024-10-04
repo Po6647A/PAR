@@ -23,4 +23,5 @@ jobs:
         cd phira
         cargo build -r --bin phira-render --target x86_64-unknown-linux-gnu
     - uses: actions/upload-artifact@v3.2.1-node20
-      path: phira/target
+      with:
+        path: phira/target

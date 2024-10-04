@@ -21,6 +21,8 @@ jobs:
     - name: Build
       run: |
         cd phira
+        sudo apt-get install libgdk-pixbuf-2.0-dev libatk1.0-dev -y
+        sudo apt update && sudo apt install -y build-essential pkg-config libgtk-3-dev libgdk-pixbuf2.0-dev libpango1.0-dev libcairo2-dev libavcodec-dev libavformat-dev libswscale-dev libjpeg-turbo8-dev libpng-dev libtiff-dev libatk1.0-dev libgstreamer-plugins-base1.0-dev libcurl4-openssl-dev libsqlite3-dev libmysqlclient-dev postgresql-contrib libicu-dev
         cargo build -r --bin phira-render --target x86_64-unknown-linux-gnu
     - uses: actions/upload-artifact@v3.2.1-node20
       with:

@@ -19,11 +19,7 @@ jobs:
     - name: Download Tools
       run: |
         curl -L -o phichain.zip https://github.com/364hao/Test/releases/download/phichain/phichain-v0.4.1+build.383-x86_64-unknown-linux-gnu.zip
-    - name: Extract Tools
-      uses: DuckSoft/extract-7z-action@v1.0
-      with:
-        pathSource: phichain.zip
-        pathTarget: ./
+        unzip phichain.zip 
     - uses: actions/setup-python@v5
       with:
         python-version: '3.12.6'

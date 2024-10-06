@@ -14,7 +14,7 @@ for difficultyDir in [EZ, HD, IN, AT]:
 	for chartName in os.listdir(difficultyDir):
 		print(chartName)
 		chartPath = os.path.join(difficultyDir, chartName)
-		processes.append(subprocess.Popen([converter, '--input', 'official', '--output', 'phichain', chartPath], shell = True))
+		processes.append(subprocess.Popen([converter, '--input', 'official', '--output', 'phichain', chartPath]))
 for p in processes:
 	p.wait()
 	

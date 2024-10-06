@@ -28,20 +28,20 @@ with open("Phigros_Resource/difficulty.tsv", encoding = "utf8") as f:
         line = line[:-1].split("\t")
         infos[line[0]]["difficulty"] = line[1:]
 
-for id, info in track(infos.items(), description = "WritingPhichainProject..."):
+for id, info in track(infos.items(), description = "WritingPhichainProject"):
     for level in range(len(info["difficulty"])):
         baseDir = f"PhichainProject/{levels[level]}/{id}"
         os.mkdir(baseDir)
         with open(baseDir+"/meta.json", 'w', encoding = 'utf-8') as f:
             f.write("{")
-            f.write(f'"composer": {info["Composer"]},')
-            f.write(f'"charter": {info["Chater"][level]},')
-            f.write(f'"illustrator": {info["Illustrator"]},')
-            f.write(f'"name": {info["Name"]},')
-            f.write(f'"level": {info["difficulty"][level]}')
+            f.write(f'"composer": "{info["Composer"]}",')
+            f.write(f'"charter": "{info["Chater"][level]}",')
+            f.write(f'"illustrator": "{info["Illustrator"]}",')
+            f.write(f'"name": "{info["Name"]}",')
+            f.write(f'"level": "{info["difficulty"][level]}"')
             f.write("}")
-        shutil.copy(f"Phigros_Resource/Chart_{levels[level]}/{id}.0.json", baseDir)
-        os.rename(baseDir+f'/{id}.0.json', baseDir + "/chart.json")
+        shutil.copy(f"Phigros_Resource/Chart_{levels[level]}/{id}.0.phichain.json", baseDir)
+        os.rename(baseDir+f'/{id}.0.phichain.json', baseDir + "/chart.json")
         shutil.copy(f"Phigros_Resource/Illustration/{id}.png", baseDir)
         os.rename(baseDir+f'/{id}.png', baseDir + "/illustration.png")
         shutil.copy(f"Phigros_Resource/music/{id}.ogg", baseDir)

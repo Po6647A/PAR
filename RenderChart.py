@@ -10,7 +10,7 @@ time.sleep(1)
 
 
 resourceDir = os.path.abspath('PhichainProject')
-renderer = os.path.abspath('phichain-renderer')
+renderer = os.path.abspath('phichain-v0.4.1+build.383-x86_64-unknown-linux-gnu/phichain-renderer')
 
 processes = []
 

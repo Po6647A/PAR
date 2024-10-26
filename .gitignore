@@ -1,1 +1,10 @@
-__pycache__
+book
+avatar/
+chart/
+Illustration/
+IllustrationBlur/
+IllustrationLowRes/
+music/
+phira/
+__pycache__/
+assests/

@@ -1,5 +1,4 @@
-moviepy
-pydub
-numpy
-rich
-Pillow
+UnityPy==1.10.18
+fsb5
+requests
+PyGithub

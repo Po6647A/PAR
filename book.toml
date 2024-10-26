@@ -1,6 +1,6 @@
 [book]
 authors = ["364hao"]
-language = "en"
+language = "zh"
 multilingual = false
 src = "src"
-title = "PhigrosAssests"
+title = "PAR"

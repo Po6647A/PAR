@@ -1,7 +1,20 @@
-# 借用，参考项目
+# PAR(Phigros_Auto_Resource)
+**自动从Taptap下载Phigros的apk文件以获取资源**
 
-## [7aGiven/Phigros_Resource](https://github.com/7aGiven/Phigros_Resource)
 
-## [3035936740/Phigros_Resource](https://github.com/3035936740/Phigros_Resource)
+# 使用示例
+`python -m pip install -r requirements.txt`
 
-## [Ivan-1F/phichain](https://github.com/Ivan-1F/phichain)
+`python main.py`
+
+# TODO
+
+- 对xapk文件的支持
+
+- Phichain项目压缩包的生成
+
+- 配置文件
+
+- 收藏品内容获取
+
+- 各版本MdBook文件生成

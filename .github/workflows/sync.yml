@@ -7,10 +7,7 @@ on:
         branches: [main]
     workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+permissions: write-all
 
 jobs:
     SyncData:
@@ -37,9 +34,6 @@ jobs:
         - name: Setup Pages
           id: pages
           uses: actions/configure-pages@v5
-        - uses: peaceiris/actions-gh-pages@v4
-          with:
-                publish_dir: ./book
         - uses: actions/upload-pages-artifact@v3
           with:
                 path: ./book

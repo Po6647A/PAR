@@ -138,7 +138,7 @@ f'''
 
 # __{info[t]['Name']} - {info[t]['difficulty'][index]}__
 
-- ### __谱面文件(Pez格式)/Chart File(Pez Format):  [下载/Download](https://github.com/{repo}/releases/download/{ver}/{uploadict[f"[Phira]{t}-{p}"]})__
+- ### __谱面文件(Pez格式)/Chart File(Pez Format):  [下载/Download](https://github.com/{repo}/releases/download/{ver}/{uploadict[f"[Phira]{t}-{pn}"]})__
 
 - ### __谱面文件(json格式)/Chart File(json Format)[下载/Download](https://github.com/{repo}/releases/download/{ver}/{uploadict[f"[Chart-{p}]{t}.json"]})__
 

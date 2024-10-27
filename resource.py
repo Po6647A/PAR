@@ -78,7 +78,7 @@ def save(key, entry):
 		key = key[:-23]
 		bytesIO = BytesIO()
 		obj.image.save(bytesIO, "png")
-		queue_in.put((f"illustrationBlur/{key}.png", bytesIO))
+		queue_in.put((f"illustrationBlur/{key}.0.png", bytesIO))
 	elif key[-25:] == ".0/IllustrationLowRes.png":
 		key = key[:-25]
 		pool.submit(save_image, f"illustrationLowRes/{key}.0.png", obj.image)

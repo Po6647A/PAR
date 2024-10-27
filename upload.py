@@ -90,6 +90,10 @@ def main():
 			print(f'Total {cnt - 1} Assests')
 			with open(f'{verdir}/uploadict.json', 'w', encoding = 'utf-8') as f:
 				json.dump(uploadict, f, ensure_ascii = False, indent = 4)
+			upload(
+				f'{verdir}/uploadict.json',
+				'upload.json'
+			)
 		except Exception as e:
 			print(e)
 			print(f'Skip Version {version}')

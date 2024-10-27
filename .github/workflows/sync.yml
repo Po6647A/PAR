@@ -1,6 +1,8 @@
 name: Sync
 
 on:
+    schedule:
+      - cron: '2 5 * * *'
     push:
         branches: [main]
     pull_request:
@@ -19,11 +21,9 @@ jobs:
             fail-fast: true
         steps:
         - uses: actions/checkout@v4
-        - uses: FedericoCarboni/setup-ffmpeg@v3
         - uses: peaceiris/actions-mdbook@v2
           with:
                 mdbook-version: 'latest'
-        - run: pip install --upgrade pip
         - run: pip install -r requirements.txt
         - run: sudo apt install libogg-dev libvorbis-dev -y
         - run: python main.py

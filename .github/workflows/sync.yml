@@ -3,10 +3,6 @@ name: Sync
 on:
     schedule:
       - cron: '2 5 * * *'
-    push:
-        branches: [main]
-    pull_request:
-        branches: [main]
     workflow_dispatch:
 
 permissions: write-all
